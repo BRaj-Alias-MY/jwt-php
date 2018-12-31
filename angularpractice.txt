@@ -1,0 +1,56 @@
+app.module.ts file: 
+======================
+
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+
+imports: 
+
+ BsDatepickerModule.forRoot()
+
+
+install: npm install ngx-bootstrap --save
+
+ "styles": [
+              "src/styles.css",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/ngx-bootstrap/datepicker/bs-datepicker.css"
+            ],
+
+=======
+View Datepicker: 
+
+  <input type="text" bsDatepicker name="date" [(ngModel)]="date" class="form-
+
+control" />
+
+
+=================================
+
+
+RXJS: 
+
+ 
+
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class MyServiceService {
+  public _url = '/assets/employees.json';
+  constructor(private http: HttpClient) { }
+  getEmployees(): Observable<any[]> {
+    return this.http.get<any[]>(this._url).pipe(catchError
+
+(this.errorHandler));
+  }
+  errorHandler(error: HttpErrorResponse) {
+    return Observable.throw(error.message || "Server Error");
+  }
+
+}
+
+
